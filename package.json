@@ -1,0 +1,49 @@
+{
+  "name": "programming-task",
+  "version": "1.0.0",
+  "description": "HTTP Log Parser",
+  "main": "index.js",
+  "author": "Jason Ngo <1.ngo.jason@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "prestart": "yarn run build",
+    "start": "node ./build/index.js",
+    "dev": "node ./build/index.js",
+    "prebuild": "rimraf build",
+    "build": "tsc",
+    "test": "jest",
+    "lint:fix": "eslint --fix .",
+    "prepare": "husky install"
+  },
+  "devDependencies": {
+    "@types/jest": "^28.1.6",
+    "@typescript-eslint/eslint-plugin": "^5.30.6",
+    "@typescript-eslint/parser": "^5.30.6",
+    "eslint": "^8.20.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "husky": "^8.0.0",
+    "jest": "^28.1.3",
+    "jest-ts-webcompat-resolver": "^1.0.0",
+    "lint-staged": "^13.0.3",
+    "prettier": "^2.7.1",
+    "rimraf": "^3.0.2",
+    "ts-jest": "^28.0.7",
+    "tsc": "^2.0.4",
+    "typescript": "^4.7.4"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.+(t|j)s": [
+      "eslint --fix .",
+      "git add"
+    ]
+  },
+  "dependencies": {
+    "winston": "^3.8.1"
+  }
+}
