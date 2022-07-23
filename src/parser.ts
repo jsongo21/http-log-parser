@@ -7,9 +7,16 @@ interface ParsedResult {
   mostActiveIPAddresses: string[];
 }
 
-export function logParser(path: string): ParsedResult {
+export async function logParser(path: string): Promise<ParsedResult> {
   console.log(path);
   const fileStream = fs.createReadStream(path);
+  const rl = readline.createInterface({
+    input: fileStream,
+  });
+
+  for await (const line of rl) {
+    parseLine(line);
+  }
 
   return {
     numUniqueIPAddresses: 1,
@@ -17,3 +24,5 @@ export function logParser(path: string): ParsedResult {
     mostVisitedURLs: [""],
   };
 }
+
+export function parseLine(line: string) { }

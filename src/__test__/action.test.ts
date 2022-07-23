@@ -6,10 +6,10 @@ import { parsedResult } from "./fixtures/parsedResult";
 
 describe("testing actions", () => {
   describe("handle file", () => {
-    test("should run log parser", () => {
-      const logParserSpy = jest.spyOn(parser, "logParser").mockReturnValue(parsedResult);
+    test("should run log parser", async () => {
+      const logParserSpy = jest.spyOn(parser, "logParser").mockResolvedValue(parsedResult);
 
-      handleFile("test.log");
+      await handleFile("test.log");
 
       expect(logParserSpy).toBeCalledWith(path.join(process.cwd(), "test.log"));
       expect(logParserSpy).toBeCalledTimes(1);
