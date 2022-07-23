@@ -25,7 +25,13 @@ interface LogCounter {
   ipAddresses: Counter;
   urls: Counter;
 }
-
+/**
+ * Reads logs file and returns parsed results
+ *
+ * @export
+ * @param {string} path
+ * @return {*}  {Promise<ParsedResult>}
+ */
 export async function logParser(path: string): Promise<ParsedResult> {
   const fileStream = fs.createReadStream(path);
   const rl = readline.createInterface({
@@ -44,7 +50,13 @@ export async function logParser(path: string): Promise<ParsedResult> {
 
   return aggregated;
 }
-
+/**
+ * parse log line and returns ip address & request details
+ *
+ * @export
+ * @param {string} line
+ * @return {*}  {LogResult}
+ */
 export function parseLine(line: string): LogResult {
   // structure
   // ip_addr clientid userid [date_time] "request" status_code size referrer user_agent
@@ -73,7 +85,13 @@ export function parseLine(line: string): LogResult {
     },
   };
 }
-
+/**
+ * aggregates log file results and calculates log statistics
+ *
+ * @export
+ * @param {LogResult[]} logResults
+ * @return {*}  {ParsedResult}
+ */
 export function aggregateLogResults(logResults: LogResult[]): ParsedResult {
   const updateCounter = (value: string, counter: { [x: string]: number }) => {
     if (counter[value] !== undefined) {
@@ -107,8 +125,14 @@ export function aggregateLogResults(logResults: LogResult[]): ParsedResult {
     numUniqueIPAddresses,
   };
 }
-
-function kTopElements(counter: Counter, k: number) {
+/**
+ * finds the top k frequent elements from a Counter object
+ *
+ * @param {Counter} counter
+ * @param {number} k
+ * @return {*}  {string[]}
+ */
+function kTopElements(counter: Counter, k: number): string[] {
   const sorted = Object.entries(counter).sort((a, b) => b[1] - a[1]);
   const kTopValues: string[] = [];
 
