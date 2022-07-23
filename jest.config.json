@@ -2,6 +2,9 @@
   "roots": [
     "<rootDir>/"
   ],
+  "modulePathIgnorePatterns": [
+    "<rootDir>/build"
+  ],
   "preset": "ts-jest",
   "testEnvironment": "node",
   "moduleFileExtensions": [

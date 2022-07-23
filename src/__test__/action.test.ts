@@ -2,12 +2,12 @@ import path from "path";
 
 import { handleFile } from "../action";
 import * as parser from "../parser";
-import { parsedResult } from "./fixtures/parsedResult";
+import { defaultParsedResult } from "./fixtures/parsedResult";
 
 describe("testing actions", () => {
   describe("handle file", () => {
     test("should run log parser", async () => {
-      const logParserSpy = jest.spyOn(parser, "logParser").mockResolvedValue(parsedResult);
+      const logParserSpy = jest.spyOn(parser, "logParser").mockResolvedValue(defaultParsedResult);
 
       await handleFile("test.log");
 
